@@ -9,17 +9,60 @@ var catData = {
 			"name": "cat name 2",
 			"image": "images/cat2.jpg",
 			"counter": 0
+		},
+		{
+			"name": "cat name 3",
+			"image": "images/cat3.jpg",
+			"counter": 0
 		}
 
 	]
 };
 
-var HTMLDivCat = '<div id= "%divCatId%" class="col-sm-4"></div>';
+var HTMLDivCat = '<div id= "%divCatId%" class="col-sm-12"></div>';
+var HTMLDivCatName = '<div id= "%divCatNameId%" class="col-sm-4"></div>';
 var HTMLCatImage = '<img id="%catId%" src="%imgSrc%" alt="Click Cat" class="img-responsive"/>';
 var HTMLCatName = '<h3 id="%nameId%"></h3>';
 var HTMLNumberOfClicks = '<h3 id="%NumOfClicks%"> number of clicks: <span>%counter%</span></h3>';
 
 
+$(document).ready(function () {
+	for (var i = 0; i < catData.cats.length; i++) {
+		console.log("catData Length: " + catData.cats.length);
+		var divCatName = HTMLDivCatName.replace('%divCatNameId%', 'divCatName' + i);
+		$('#catList').append(divCatName);
+
+		var catName = HTMLCatName.replace('%nameId%', 'catName' + i);
+		$('#divCatName' + i).append(catName);
+		$('#catName' + i).html(catData.cats[i].name);
+		(function (currentCat) {
+			var image = catData.cats[currentCat].image;
+			var count = catData.cats[currentCat].counter;
+			$('#catName' + currentCat).click(function () {
+				console.log(catData.cats[currentCat].name);
+				var divCat = HTMLDivCat.replace('%divCatId%', 'divCat' + currentCat);
+				$('#cats').html(divCat);
+
+				var imgCat = HTMLCatImage.replace('%catId%', 'catImage' + currentCat);
+				$('#divCat' + currentCat).append(imgCat);
+				$("#catImage" + currentCat).attr('src', catData.cats[currentCat].image);
+
+				var numberOfClicksCat = HTMLNumberOfClicks.replace('%NumOfClicks%', 'counterCat' + currentCat);
+				$('#divCat' + currentCat).append(numberOfClicksCat);
+				$('#counterCat' + currentCat).children('span').html(catData.cats[currentCat].counter);
+
+				$('#catImage' + currentCat).click(function () {
+					count++;
+					//console.log(count);
+					$('#counterCat' + currentCat).children('span').html(count);
+				});
+
+			});
+		})(i);
+
+	}
+});
+/*
 $(document).ready(function () {
 	for (var i = 0; i < catData.cats.length; i++) {
 		console.log(catData.cats.length);
@@ -48,3 +91,4 @@ $(document).ready(function () {
 		})(i);
 	}
 });
+*/
