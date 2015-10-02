@@ -1,4 +1,6 @@
+// model
 var catData = {
+	"currentCat": 0,
 	"cats": [
 		{
 			"name": "cat name 1",
@@ -19,11 +21,42 @@ var catData = {
 	]
 };
 
+
+// view
 var HTMLDivCat = '<div id= "%divCatId%" class="divCat col-sm-12"></div>';
 var HTMLDivCatName = '<div id= "%divCatNameId%" class="col-sm-4"></div>';
 var HTMLCatImage = '<img id="%catId%" src="%imgSrc%" alt="Click Cat" class="img-responsive"/>';
 var HTMLCatName = '<h3 id="%nameId%"></h3>';
 var HTMLNumberOfClicks = '<h3 id="%NumOfClicks%"> number of clicks: <span>%counter%</span></h3>';
+
+var viewCats = {
+	// init
+	
+	// render
+	
+	 
+};
+
+var viewCatsList = {
+	
+};
+
+
+
+// controler
+var controller = {
+	// init
+	
+	// getCurrentCat
+	
+	// setCurrentCat(catIndex)
+	
+	// getCats
+	
+	// increment counter
+};
+
+
 
 
 $(document).ready(function () {
