@@ -19,7 +19,7 @@ var catData = {
 	]
 };
 
-var HTMLDivCat = '<div id= "%divCatId%" class="col-sm-12"></div>';
+var HTMLDivCat = '<div id= "%divCatId%" class="divCat col-sm-12"></div>';
 var HTMLDivCatName = '<div id= "%divCatNameId%" class="col-sm-4"></div>';
 var HTMLCatImage = '<img id="%catId%" src="%imgSrc%" alt="Click Cat" class="img-responsive"/>';
 var HTMLCatName = '<h3 id="%nameId%"></h3>';
@@ -47,13 +47,16 @@ $(document).ready(function () {
 				$('#divCat' + currentCat).append(imgCat);
 				$("#catImage" + currentCat).attr('src', catData.cats[currentCat].image);
 
+				var catName = HTMLCatName.replace('%nameId%', 'catName' + currentCat);
+				$('#divCat' + currentCat).append(catName);
+				$('#divCat' + currentCat).children('#catName' + currentCat).html(catData.cats[currentCat].name);
+
 				var numberOfClicksCat = HTMLNumberOfClicks.replace('%NumOfClicks%', 'counterCat' + currentCat);
 				$('#divCat' + currentCat).append(numberOfClicksCat);
 				$('#counterCat' + currentCat).children('span').html(catData.cats[currentCat].counter);
 
 				$('#catImage' + currentCat).click(function () {
 					count++;
-					//console.log(count);
 					$('#counterCat' + currentCat).children('span').html(count);
 				});
 
