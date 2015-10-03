@@ -6,11 +6,11 @@
 </head>
 <body>
 	<div id="cat">
-		<h2 id="cat-name"></h2>
-		<div id="cat-count"></div>
-		<img id="cat-img" src="" alt="cute cat">
+		<h2  data-bind="text: name"></h2>
+		<div data-bind="text: counter"></div>
+		<img data-bind="click: incremenCounter, attr: {src: imgSrc}" src="" alt="cute cat">
 	</div>
 	<script src="js/libs/knockout-3.3.0.js"></script>
-	<script src="js/app.js"></script>
+	<script src="js/app-knocout.js"></script>
 </body>
 </html>
