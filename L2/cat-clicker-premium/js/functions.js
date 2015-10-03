@@ -33,19 +33,7 @@ var catData = {
 var viewCats = {
 	// init
 	init: function () {
-
-	},
-	// render
-	render: function () {
-
-	}
-};
-
-var viewCatsList = {
-	// init
-	init: function () {
 		this.HTMLDivCat = '<div id= "%divCatId%" class="divCat col-sm-12"></div>';
-		this.HTMLDivCatName = '<div id= "%divCatNameId%" class="col-sm-4"></div>';
 		this.HTMLCatImage = '<img id="%catId%" src="%imgSrc%" alt="Click Cat" class="img-responsive"/>';
 		this.HTMLCatName = '<h3 id="%nameId%"></h3>';
 		this.HTMLNumberOfClicks = '<h3 id="%NumOfClicks%"> number of clicks: <span>%counter%</span></h3>';
@@ -53,19 +41,32 @@ var viewCatsList = {
 	},
 	// render
 	render: function () {
-		var cats = controller.getCats();
-		console.log(cats);
-		for (var i = 0; i < cats.length; i++) {
-			var divCatName =  this.HTMLDivCatName.replace('%divCatNameId%', 'divCatName' + i);
-			$('#catList').append(divCatName);
+		var currentCat = catData.currentCat;
+		var cat = catData.cats;
+		console.log("viewCats: " + cat[currentCat].name + " is clicked and current cat is " + currentCat);
+		
+		var divCat = this.HTMLDivCat.replace('%divCatId%', 'divCat' + currentCat);
+		$('#cats').html(divCat);
 
-			var catName = this.HTMLCatName.replace('%nameId%', 'catName' + i);
-			$('#divCatName' + i).append(catName);
-			$('#catName' + i).html(cats[i].name);
-		}
+		var imgCat = this.HTMLCatImage.replace('%catId%', 'catImage' + currentCat);
+		$('#divCat' + currentCat).append(imgCat);
+		$("#catImage" + currentCat).attr('src', cat[currentCat].image);
+
+		var catName = this.HTMLCatName.replace('%nameId%', 'catName' + currentCat);
+		$('#divCat' + currentCat).append(catName);
+		$('#divCat' + currentCat).children('#catName' + currentCat).html(cat[currentCat].name);
+
+		var numberOfClicksCat = this.HTMLNumberOfClicks.replace('%NumOfClicks%', 'counterCat' + currentCat);
+		$('#divCat' + currentCat).append(numberOfClicksCat);
+		$('#counterCat' + currentCat).children('span').html(cat[currentCat].counter);
+
+		$('#catImage' + currentCat).click(function () {
+			controller.incremenCounter();
+			//$('#counterCat' + currentCat).children('span').html(count);
+		});
 	}
-
 };
+
 
 //
 //$(document).ready(function () {
@@ -109,6 +110,39 @@ var viewCatsList = {
 //});
 
 
+var viewCatsList = {
+	// init
+	init: function () {
+		this.HTMLDivCatName = '<div id= "%divCatNameId%" class="col-sm-4"></div>';
+		this.HTMLCatName = '<h3 id="%nameId%"></h3>';
+		this.render();
+	},
+	// render
+	render: function () {
+		var cats = controller.getCats();
+		console.log(cats);
+		for (var i = 0; i < cats.length; i++) {
+			var cat = cats[i];
+			var divCatName = this.HTMLDivCatName.replace('%divCatNameId%', 'divCatName' + i);
+			$('#catList').append(divCatName);
+
+			var catName = this.HTMLCatName.replace('%nameId%', 'catName' + i);
+			$('#divCatName' + i).append(catName);
+			$('#catName' + i).html(cat.name);
+			(function (currentCat) {
+				$('#catName' + currentCat).click(function () {
+					controller.setCurrentCat(currentCat);
+					viewCats.render();
+					console.log(cats[currentCat].name + " is clicked and current cat is " + controller.getCurrentCat());
+
+				});
+			})(i);
+		}
+	}
+
+};
+
+
 
 // controler
 var controller = {
@@ -131,40 +165,51 @@ var controller = {
 	},
 	// increment counter
 	incremenCounter: function () {
-		catData.currentCat.counter++;
+		catData.cats[this.getCurrentCat()].counter++;
 		viewCats.render();
 	}
 };
 
 
-/*
-$(document).ready(function () {
-	for (var i = 0; i < catData.cats.length; i++) {
-		console.log(catData.cats.length);
-		var divCat = HTMLDivCat.replace('%divCatId%', 'divCat' + i);
-		$('#cats').append(divCat);
+//
+//$(document).ready(function () {
+//	for (var i = 0; i < catData.cats.length; i++) {
+//		console.log("catData Length: " + catData.cats.length);
+//		var divCatName = HTMLDivCatName.replace('%divCatNameId%', 'divCatName' + i);
+//		$('#catList').append(divCatName);
+//
+//		var catName = HTMLCatName.replace('%nameId%', 'catName' + i);
+//		$('#divCatName' + i).append(catName);
+//		$('#catName' + i).html(catData.cats[i].name);
+//		(function (currentCat) {
+//			var image = catData.cats[currentCat].image;
+//			var count = catData.cats[currentCat].counter;
+//			$('#catName' + currentCat).click(function () {
+//				console.log(catData.cats[currentCat].name);
+//				var divCat = HTMLDivCat.replace('%divCatId%', 'divCat' + currentCat);
+//				$('#cats').html(divCat);
+//
+//				var imgCat = HTMLCatImage.replace('%catId%', 'catImage' + currentCat);
+//				$('#divCat' + currentCat).append(imgCat);
+//				$("#catImage" + currentCat).attr('src', catData.cats[currentCat].image);
+//
+//				var catName = HTMLCatName.replace('%nameId%', 'catName' + currentCat);
+//				$('#divCat' + currentCat).append(catName);
+//				$('#divCat' + currentCat).children('#catName' + currentCat).html(catData.cats[currentCat].name);
+//
+//				var numberOfClicksCat = HTMLNumberOfClicks.replace('%NumOfClicks%', 'counterCat' + currentCat);
+//				$('#divCat' + currentCat).append(numberOfClicksCat);
+//				$('#counterCat' + currentCat).children('span').html(catData.cats[currentCat].counter);
+//
+//				$('#catImage' + currentCat).click(function () {
+//					count++;
+//					$('#counterCat' + currentCat).children('span').html(count);
+//				});
+//
+//			});
+//		})(i);
+//
+//	}
+//});
 
-		var imgCat = HTMLCatImage.replace('%catId%', 'catImage' + i);
-		$('#divCat' + i).append(imgCat);
-		$("#catImage" + i).attr('src', catData.cats[i].image);
-
-
-		var catName = HTMLCatName.replace('%nameId%', 'catName' + i);
-		$('#divCat' + i).append(catName);
-		$('#catName' + i).html(catData.cats[i].name);
-
-		var numberOfClicksCat = HTMLNumberOfClicks.replace('%NumOfClicks%', 'counterCat' + i);
-		$('#divCat' + i).append(numberOfClicksCat);
-		$('#counterCat' + i).children('span').html(catData.cats[i].counter);
-		(function (iCurrent) {
-			var count = catData.cats[iCurrent].counter;
-			$('#catImage' + iCurrent).click(function () {
-				count++;
-				//console.log(count);
-				$('#counterCat' + iCurrent).children('span').html(count);
-			});
-		})(i);
-	}
-});
-*/
 controller.init();
