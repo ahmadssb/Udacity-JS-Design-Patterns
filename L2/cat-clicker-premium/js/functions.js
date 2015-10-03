@@ -146,6 +146,11 @@ var viewAdmin = {
 	init: function () {
 		this.adminForm = $("#adminForm");
 		this.adminBtn = $("#adminBtn");
+		this.cancelAdmin = $("#cancelAdmin");
+		this.submitAdmin = $("#submitAdmin");
+		this.inputCatName = $("#catName").val();
+		this.inputCatImage = $("#catImage").val();
+		this.inputCatCounter = $("#catCounter").val();
 		this.render();
 	},
 	
@@ -153,6 +158,13 @@ var viewAdmin = {
 		this.adminForm.hide();
 		this.adminBtn.click(function() {
 			$("#adminForm").toggle(300);
+		});
+		this.cancelAdmin.click(function() {
+			$("#adminForm").hide(300);
+		});
+		this.submitAdmin.click(function() {
+			controller.addNewCat($("#catName").val(), $("#catImage").val(), $("#catCounter").val());
+			console.log($("#catName").val() + " - " + $("#catImage").val() + " - " + $("#catCounter").val())
 		});
 	}
 	
@@ -186,8 +198,16 @@ var controller = {
 		viewCats.render();
 	},
 	
-	toggleAdminForm: function() {
-		
+	addNewCat: function(catName, catImage, catCounter) {
+		this.getCats().push({
+			"name": catName,
+			"image": catImage,
+			"counter": catCounter
+		});
+		console.log("addNewCat: " + catName + " - " +  catImage + " - " + catCounter);
+		console.log(this.getCats());
+		viewCatsList.render();
+		viewCats.render();
 	}
 	
 };
