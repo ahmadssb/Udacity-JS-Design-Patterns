@@ -113,13 +113,15 @@ var viewCats = {
 var viewCatsList = {
 	// init
 	init: function () {
-		this.HTMLDivCatName = '<div id= "%divCatNameId%" class="col-sm-4"></div>';
+		this.HTMLRowCatList = $("#catList");
+		this.HTMLDivCatName = '<div id= "%divCatNameId%" class="col-sm-2"></div>';
 		this.HTMLCatName = '<h3 id="%nameId%"></h3>';
 		this.render();
 	},
 	// render
 	render: function () {
 		var cats = controller.getCats();
+		this.HTMLRowCatList.html('');
 		console.log(cats);
 		for (var i = 0; i < cats.length; i++) {
 			var cat = cats[i];
@@ -134,7 +136,6 @@ var viewCatsList = {
 					controller.setCurrentCat(currentCat);
 					viewCats.render();
 					console.log(cats[currentCat].name + " is clicked and current cat is " + controller.getCurrentCat());
-
 				});
 			})(i);
 		}
