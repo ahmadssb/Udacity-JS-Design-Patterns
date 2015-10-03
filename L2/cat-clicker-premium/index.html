@@ -13,14 +13,32 @@
 
 <body>
 	<div class="container">
-		<div id="catList" class="row divCatList">
-			
+		<div id="admin" class="row">
+			<div class="col-md-12">
+				<button id="adminBtn">Admin</button>
+				<form action="#" method="get" id="adminForm" >
+					<p>
+						<input type="text" name="catName" placeholder="Enter Cat Name">
+					</p>
+					<p>
+						<input type="text" name="catImage" placeholder="Enter Cat Image">
+					</p>
+					<p>
+						<input type="text" name="catCounter" placeholder="Enter Cat counter">
+					</p>
+					<p><input type="submit" value="Save"> <input type="submit" value="Cancel"></p>
+				</form>
+			</div>
 		</div>
-		<div id ="cats" class="row divCats">
-			
+		<div id="catList" class="row divCatList">
+
+		</div>
+		<div id="cats" class="row divCats">
+
 		</div>
 	</div>
 
 </body>
-	<script src="js/functions.js"></script>
+<script src="js/functions.js"></script>
+
 </html>

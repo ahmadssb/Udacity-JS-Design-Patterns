@@ -44,7 +44,7 @@ var viewCats = {
 		var currentCat = catData.currentCat;
 		var cat = catData.cats;
 		console.log("viewCats: " + cat[currentCat].name + " is clicked and current cat is " + currentCat);
-		
+
 		var divCat = this.HTMLDivCat.replace('%divCatId%', 'divCat' + currentCat);
 		$('#cats').html(divCat);
 
@@ -142,6 +142,22 @@ var viewCatsList = {
 
 };
 
+var viewAdmin = {
+	init: function () {
+		this.adminForm = $("#adminForm");
+		this.adminBtn = $("#adminBtn");
+		this.render();
+	},
+	
+	render: function () {
+		this.adminForm.hide();
+		this.adminBtn.click(function() {
+			$("#adminForm").toggle(300);
+		});
+	}
+	
+}
+
 
 
 // controler
@@ -150,6 +166,7 @@ var controller = {
 	init: function () {
 		viewCatsList.init();
 		viewCats.init();
+		viewAdmin.init();
 	},
 	// getCurrentCat
 	getCurrentCat: function () {
@@ -167,7 +184,12 @@ var controller = {
 	incremenCounter: function () {
 		catData.cats[this.getCurrentCat()].counter++;
 		viewCats.render();
+	},
+	
+	toggleAdminForm: function() {
+		
 	}
+	
 };
 
 
