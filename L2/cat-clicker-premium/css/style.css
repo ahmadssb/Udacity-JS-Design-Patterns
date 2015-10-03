@@ -1,0 +1,18 @@
+
+
+.divCats {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.divCat {
+    margin-left: auto;
+    margin-right: auto; 
+    width: 100% /*whatever width you want*/;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.divCats img{
+	vertical-align: middle
+}
