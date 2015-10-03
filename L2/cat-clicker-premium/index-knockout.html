@@ -9,6 +9,13 @@
 		<h2  data-bind="text: name"></h2>
 		<div data-bind="text: counter"></div>
 		<img data-bind="click: incremenCounter, attr: {src: imgSrc}" src="" alt="cute cat">
+		
+		<h4>NickNames</h4>
+		<ul data-bind="foreach: cat">
+			<li>
+				<span data-bind="text: nickname"></span>
+			</li>
+		</ul>
 	</div>
 	<script src="js/libs/knockout-3.3.0.js"></script>
 	<script src="js/app-knocout.js"></script>
