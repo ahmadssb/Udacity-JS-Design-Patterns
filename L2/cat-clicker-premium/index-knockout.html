@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Cat Clicker</title>
 </head>
+
 <body>
+	<ul data-bind="foreach: catList">
+		<li data-bind="text: name, click: $parent.setCat"></li>
+	</ul>
 	<div id="cat" data-bind="with: currentCat">
-		<h2  data-bind="text: name"></h2>
+		<h2 data-bind="text: name"></h2>
 		<h3>you ara on level <span data-bind="text: level"></span></h3>
 		<div data-bind="text: counter"></div>
 		<img data-bind="click: $parent.incremenCounter, attr: {src: imgSrc}" src="" alt="cute cat">
-		
+
 		<h4>NickNames</h4>
 		<ul data-bind="foreach: nickname">
 			<li>
@@ -21,4 +26,5 @@
 	<script src="js/libs/knockout-3.3.0.js"></script>
 	<script src="js/app-knocout.js"></script>
 </body>
+
 </html>

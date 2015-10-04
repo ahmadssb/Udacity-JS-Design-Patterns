@@ -1,3 +1,29 @@
+var catData = {
+	"currentCat": 0,
+	"cats": [
+		{
+			"name": "cat name 1",
+			"imgSrc": "images/cat1.jpg",
+			"counter": 0,
+			"nickname": ["abbas1 Nickname"]
+
+		},
+		{
+			"name": "cat name 2",
+			"imgSrc": "images/cat2.jpg",
+			"counter": 0,
+			"nickname": ["abbas2 Nickname"]
+		},
+		{
+			"name": "cat name 3",
+			"imgSrc": "images/cat3.jpg",
+			"counter": 0,
+			"nickname": ["abbas3 Nickname"]
+		}
+
+	]
+};
+
 var Cat = function (data) {
 
 	this.counter = ko.observable(data.counter);
@@ -24,14 +50,22 @@ var Cat = function (data) {
 	}, this);
 };
 
+
+
 var ViewModel = function () {
 	var self = this;
-	this.currentCat = ko.observable(new Cat({
-		counter: 0,
-		name: 'abbas',
-		imgSrc: 'images/cat2.jpg',
-		nickname: [ "abbas1 Nickname", "abbas2 Nickname", "abbas3 Nickname"]
-	}));
+
+	this.catList = ko.observableArray([]);
+
+	catData.cats.forEach(function (catItem) {
+		self.catList.push(new Cat(catItem));
+	});
+	this.setCat = function (catId) {
+		console.log("catId" + catId);
+		self.currentCat(catId);
+	};
+
+	this.currentCat = ko.observable(this.catList()[0]);
 	this.incremenCounter = function () {
 		self.currentCat().counter(self.currentCat().counter() + 1);
 
