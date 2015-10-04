@@ -1,4 +1,4 @@
-var Cat = function(){
+var Cat = function () {
 
 	this.counter = ko.observable(0);
 	this.name = ko.observable('cat 1');
@@ -35,8 +35,8 @@ var Cat = function(){
 		}
 		return level;
 	}, this);
-	
-	
+
+
 
 }
 var ViewModel = function () {
