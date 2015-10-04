@@ -1,23 +1,10 @@
-var Cat = function () {
+var Cat = function (data) {
 
-	this.counter = ko.observable(0);
-	this.name = ko.observable('cat 1');
-	this.imgSrc = ko.observable('images/cat1.jpg');
+	this.counter = ko.observable(data.counter);
+	this.name = ko.observable(data.name);
+	this.imgSrc = ko.observable(data.imgSrc);
 
-	this.cat = ko.observableArray([
-		{
-			nickname: 'kitty1'
-		},
-		{
-			nickname: 'kitty2'
-		},
-		{
-			nickname: 'kitty3'
-		},
-		{
-			nickname: 'kitty4'
-		}
-	]);
+	this.nickname = ko.observableArray(data.nickname);
 
 	this.level = ko.computed(function () {
 		var level;
@@ -35,13 +22,16 @@ var Cat = function () {
 		}
 		return level;
 	}, this);
+};
 
-
-
-}
 var ViewModel = function () {
 	var self = this;
-	this.currentCat = ko.observable(new Cat());
+	this.currentCat = ko.observable(new Cat({
+		counter: 0,
+		name: 'abbas',
+		imgSrc: 'images/cat2.jpg',
+		nickname: [ "abbas1 Nickname", "abbas2 Nickname", "abbas3 Nickname"]
+	}));
 	this.incremenCounter = function () {
 		self.currentCat().counter(self.currentCat().counter() + 1);
 
