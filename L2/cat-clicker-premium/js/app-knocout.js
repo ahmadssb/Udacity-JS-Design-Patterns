@@ -42,7 +42,7 @@ var Cat = function(){
 var ViewModel = function () {
 	this.currentCat = ko.observable(new Cat());
 	this.incremenCounter = function () {
-		this.currentCat().counter(this.currentCat().counter() + 1);
+		this.counter(this.counter() + 1);
 
 	};
 
