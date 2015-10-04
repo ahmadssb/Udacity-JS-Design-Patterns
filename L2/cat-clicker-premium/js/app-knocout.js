@@ -1,13 +1,8 @@
-var ViewModel = function () {
+var Cat = function(){
+
 	this.counter = ko.observable(0);
 	this.name = ko.observable('cat 1');
 	this.imgSrc = ko.observable('images/cat1.jpg');
-
-
-	this.incremenCounter = function () {
-		this.counter(this.counter() + 1);
-
-	};
 
 	this.cat = ko.observableArray([
 		{
@@ -40,6 +35,17 @@ var ViewModel = function () {
 		}
 		return level;
 	}, this);
+	
+	
+
+}
+var ViewModel = function () {
+	this.currentCat = ko.observable(new Cat());
+	this.incremenCounter = function () {
+		this.currentCat().counter(this.currentCat().counter() + 1);
+
+	};
+
 };
 
 
